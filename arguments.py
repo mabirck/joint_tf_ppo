@@ -47,8 +47,14 @@ def get_args():
                         help='vis interval, one log per n updates (default: 100)')
     parser.add_argument('--num-frames', type=int, default=10e6,
                         help='number of frames to train (default: 10e6)')
-    parser.add_argument('--env-name', default='PongNoFrameskip-v4',
-                        help='environment to train on (default: PongNoFrameskip-v4)')
+
+    # parser.add_argument('--env-name', default='PongNoFrameskip-v4',
+    #                     help='environment to train on (default: PongNoFrameskip-v4)')
+
+    # Change Argument to list of names##
+    parser.add_argument('--env-name', nargs='+', default=["SonicTheHedgehog-Genesis,SpringYardZone.Act3"])
+    ##################################
+
     parser.add_argument('--log-dir', default='/tmp/gym/',
                         help='directory to save agent logs (default: /tmp/gym)')
     parser.add_argument('--save-dir', default='./trained_models/',

@@ -15,7 +15,8 @@ from arguments import get_args
 from baselines.common.vec_env.dummy_vec_env import DummyVecEnv
 from baselines.common.vec_env.subproc_vec_env import SubprocVecEnv
 from baselines.common.vec_env.vec_normalize import VecNormalize
-from envs import make_env
+#from envs import make_env, make_env_retro
+from sonic_util import make_env
 from kfac import KFACOptimizer
 from model import CNNPolicy, MLPPolicy
 from storage import RolloutStorage
@@ -54,8 +55,12 @@ def main():
         viz = Visdom(port=args.port)
         win = None
 
-    envs = [make_env(args.env_name, args.seed, i, args.log_dir)
-                for i in range(args.num_processes)]
+    # envs = [make_env(args.env_name, args.seed, i, args.log_dir)
+    #             for i in range(args.num_processes)]
+    for i in range(len(args.env_name)):
+        print(args.env_name[i])
+    envs = [make_env
+                    for i in range(len(args.env_name))]
 
     if args.num_processes > 1:
         envs = SubprocVecEnv(envs)
