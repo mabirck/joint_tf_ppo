@@ -89,6 +89,5 @@ def get_distribution(num_inputs, action_space):
         num_outputs = action_space.shape[0]
         dist = DiagGaussian(num_inputs, num_outputs)
     else:
-        print(action_space.__class__.__name__)
         raise NotImplementedError
     return dist

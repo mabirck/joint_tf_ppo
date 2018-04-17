@@ -6,10 +6,6 @@ from gym.spaces.box import Box
 from baselines import bench
 from baselines.common.atari_wrappers import make_atari, wrap_deepmind
 
-from sonic_util import make_env as make_env_sonic
-
-from threading import Thread
-
 try:
     import dm_control2gym
 except ImportError:
@@ -20,22 +16,6 @@ try:
     import roboschool
 except ImportError:
     pass
-
-# Getting env ready to go in retro contest
-def make_env_retro(env_id, seed, rank, log_dir):
-    def _thunk():
-        env = target=make_env_sonic(env_id=env_id)
-        env.seed(seed + rank)
-
-        if log_dir is not None:
-            env = bench.Monitor(env, os.path.join(log_dir, str(rank)))
-
-        # If the input has shape (W,H,3), wrap for PyTorch convolutions
-        obs_shape = env.observation_space.shape
-        
-        return env
-
-    return _thunk()
 
 
 def make_env(env_id, seed, rank, log_dir):
