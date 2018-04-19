@@ -7,18 +7,18 @@ Train an agent on Sonic using PPO2 from OpenAI Baselines.
 import tensorflow as tf
 
 from vec_env.dummy_vec_env import DummyVecEnv
+from subproc_vec_env import SubprocVecEnv
 import baselines.ppo2.ppo2 as ppo2
 import baselines.ppo2.policies as policies
 import gym_remote.exceptions as gre
-
-from multiprocessing import Process
 
 from sonic_util import make_env
 
 def getEnvs():
     envs = [make_env for i in range(0, 2)]
+    envs = SubprocVecEnv(envs)
     print(envs)
-    return DummyVecEnv(envs)
+    return envs
 
 def main():
     """Run PPO until the environment throws an exception."""
