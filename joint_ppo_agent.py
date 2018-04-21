@@ -13,11 +13,13 @@ import baselines.ppo2.policies as policies
 import gym_remote.exceptions as gre
 
 from sonic_util import make_env
+from tools import getListOfGames
+
 
 def getEnvs():
-    envs = [make_env for i in range(0, 2)]
+    envs = [make_env for i in range(0, len(getListOfGames("train")))]
     envs = SubprocVecEnv(envs)
-    print(envs)
+    print(envs, "******************* ENVS **************************")
     return envs
 
 def main():

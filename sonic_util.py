@@ -9,13 +9,17 @@ from baselines.common.atari_wrappers import WarpFrame, FrameStack
 import gym_remote.client as grc
 
 from retro_contest.local import make
+from tools import getListOfGames
 
 def make_env(index=0, stack=False, scale_rew=True):
     """
     Create an environment with some standard wrappers.
     """
     #env = grc.RemoteEnv('tmp/sock')
-    games = ['SonicTheHedgehog-Genesis,SpringYardZone.Act3', 'SonicTheHedgehog-Genesis,SpringYardZone.Act3']
+    #games = ['SonicTheHedgehog-Genesis,SpringYardZone.Act3', 'SonicTheHedgehog-Genesis,SpringYardZone.Act3']
+
+    games = getListOfGames("train")
+
 
     game, state = games[index].split(',')
 
