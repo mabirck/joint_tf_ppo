@@ -10,6 +10,10 @@ from vec_env.dummy_vec_env import DummyVecEnv
 from subproc_vec_env import SubprocVecEnv
 import baselines.ppo2.ppo2 as ppo2
 import baselines.ppo2.policies as policies
+# Modified to save and load
+import ppo2_modified.ppo2.ppo2 as ppo2
+import ppo2_modified.ppo2.policies as policies
+
 import gym_remote.exceptions as gre
 
 from sonic_util import make_env
@@ -18,8 +22,9 @@ from tools import getListOfGames
 
 def getEnvs():
     envs = [make_env for i in range(0, len(getListOfGames("train")))]
+    print(envs, "******************* ENVS BEFORE SubprocVecEnv **************************")
     envs = SubprocVecEnv(envs)
-    print(envs, "******************* ENVS **************************")
+    print(envs, "******************* ENVS AFTER SubprocVecEnv **************************")
     return envs
 
 def main():
@@ -42,7 +47,8 @@ def main():
                    ent_coef=0.01,
                    lr=lambda _: 2e-4,
                    cliprange=lambda _: 0.1,
-                   total_timesteps=int(1e7))
+                   total_timesteps=int(1e7),
+                   save_interval=1)
 
 if __name__ == '__main__':
     try:
