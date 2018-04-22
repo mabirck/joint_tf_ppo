@@ -47,8 +47,8 @@ def main():
                    ent_coef=0.01,
                    lr=lambda _: 2e-4,
                    cliprange=lambda _: 0.1,
-                   total_timesteps=int(1e7),
-                   save_interval=1)
+                   total_timesteps=int(5*1e7),
+                   save_interval=1e7)
 
 if __name__ == '__main__':
     try:

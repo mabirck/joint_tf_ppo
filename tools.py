@@ -14,4 +14,4 @@ def getListOfGames(regime):
                 firstline = False
                 continue
             names.append(row[0])
-    return names[:2]
+    return names
